@@ -4,7 +4,6 @@ from IPython.display import display
 import pandas as pd
 import ipywidgets as widgets
 from ipysheet.easy import cell
-from ipywidgets import Layout
 import re
 
 class Member:
@@ -14,11 +13,11 @@ class Member:
         
 class Component:
     def __init__(self, creator, component_name, concentration, is_buffer):
-        self.creator = creator 
+        self.creator = creator
         self.component_name = component_name
         self.concentration = concentration
         self.component_id = f"{component_name}_{concentration}"
-        self.is_buffer = is_buffer # not sure how to use this yet.
+        self.is_buffer = is_buffer
         self.curr_time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
 #ideally the entire inventory should be a real time interaction, rather than typing. 
@@ -33,23 +32,19 @@ class Inventory:
         self.header = ['Component ID', 'Name','Concentration','Added By', "Date Added"]
         for i, col_name in enumerate(self.header):
             ipysheet.cell(row=0, column=i, value=col_name)
-
         ipysheet.renderer(code=self.renderer_contains_component, name="component_exists")
 
-        self.display_options()
 
     def add_row(self,btn):
         self.sheet.rows += 1
 
-    def create_add_button(self):
-        add_button = widgets.Button(description="Add Component to Inventory")
+    def create_add_button(self, message):
+        add_button = widgets.Button(description=message)
         out = widgets.Output()
 
         add_button.on_click(self.add_row)
         widgets.VBox([add_button,self.sheet])
 
-
-        display(add_button)
         return add_button
 
     def renderer_contains_component(self):
@@ -57,29 +52,6 @@ class Inventory:
             'backgroundColor': 'green'
         }
     
-    def display_options(self):
-        add_button = widgets.Button(description="Add Component",  layout=Layout(display='flex', flex_flow='row'))
-        remove_button = widgets.Button(description="Remove Component",  layout=Layout(display='flex', flex_flow='row'))
-        display_button = widgets.Button(description="Display All Components",  layout=Layout(display='flex', flex_flow='row'))
-        search_button = widgets.Button(description="Search for Component",  layout=Layout(display='flex', flex_flow='row'))
-
-        def hand(self):
-            print("Clicked")
-
-        add_button.on_click(hand)
-        remove_button.on_click(hand)
-        display_button.on_click(self.display_inventory)
-        search_button.on_click(hand)
-
-        out = widgets.Output()
-        widgets.VBox([add_button, remove_button, display_button, search_button, self.sheet])
-
-        display(add_button)
-        display(remove_button)
-        display(display_button)
-        display(search_button)
-
-        return [add_button, remove_button, display_button, search_button]
 
     # pass in component object as a whole
     def contains_component(self, component):
@@ -102,8 +74,7 @@ class Inventory:
             
 
     def add_component(self, component):
-
-        #is it possible for me to grab the data when they enter it in the table in real time
+        # is it possible for me to grab the data when they enter it in the table in real time
         # or maybe i can give them option to add compoennt, dispaly some form, and have the
         # table dynamically update.
 
@@ -116,7 +87,6 @@ class Inventory:
         last_row = len(self.components)
         self.sheet.rows += 1
 
-# need some error handling done here
 
         # set the values for the new row
         ipysheet.cell(last_row,0,component.component_id)
@@ -153,7 +123,9 @@ class Inventory:
                 print(f"Consider checking out {id} instead!")
 
 
+
     def search_for_components(self):
+
         mixtureMenu = widgets.Dropdown(
         options=['MgCI_10X', 'h20', 'NacI_1X'],
         value='MgCI_10X',
@@ -162,8 +134,9 @@ class Inventory:
         )
 
         return mixtureMenu
+    
 
-    def display_inventory(self, callback):
+    def display_inventory(self):
         display(self.sheet)
 
 
