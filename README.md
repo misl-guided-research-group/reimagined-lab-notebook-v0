@@ -18,7 +18,7 @@ Developers / Researchers : Please create a seperate branch for the individual co
 
 - **FrontEnd Components**
 
-- display inventory button → inventory displays like a table
+    - display inventory button → inventory displays like a table
     - close inventory button
     - text input to put desired component search
     - delete button (pause)
