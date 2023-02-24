@@ -16,7 +16,7 @@ Developers / Researchers : Please create a seperate branch for the individual co
 
 - [ ]  **Basic Inventory Support → Reactive Updates (i.e Do we have the concentration or not?)**
 
-**FrontEnd Components**
+- **FrontEnd Components**
 
 - display inventory button → inventory displays like a table
     - close inventory button
