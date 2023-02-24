@@ -1,11 +1,8 @@
 # reimagined-lab-notebook-prototype-v0
-Initial reimagined lab notebook prototype ~ version 0
 
 Developers / Researchers : Please create a seperate branch for the individual core features. 
 
- This repository contains the initial key features that were scoped out utilizing jupyter notebooks + extensions + reactive programming
-
-Version 0 of the reimagined lab notebook ideally should support the following features:
+ This repository contains the initial key features that were scoped out utilizing jupyter notebooks + extensions + reactive programming. Version 0 of the reimagined lab notebook ideally should support the following features:
 
 - [ ]  **Calculations: Mixing Calculation Automation (i.e finding concentrations, amounts etc)**
 
