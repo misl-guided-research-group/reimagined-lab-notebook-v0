@@ -41,3 +41,42 @@ Developers / Researchers : Please create a seperate branch for the individual co
     - `isAmountSus( )`  → too little or too high, can't make something more concentrated than what you actually have
     - `isInInventory( )`
     - Alhambra Errors (taken care of)
+
+
+    component_concentration = input("Please enter the concentration of the mixture")
+            print(component_concentration)
+
+            member_name = input("Please enter your first and last name seperated by a space")
+            print(member_name) # might need to dynamically get the name
+
+            # self, creator, component_name, concentration, is_buffer)
+            # maybe just create a global member to be persisted throughout the entire cycle 
+            first_name = member_name.split(" ")[0]
+            last_name = member_name.split(" ")[1]
+
+            member = Member(first_name, last_name)
+
+            new_component = Component(member,component_name, component_concentration,False)
+            
+
+            #is it possible for me to grab the data when they enter it in the table in real time
+            # or maybe i can give them option to add compoennt, dispaly some form, and have the
+            # table dynamically update.
+
+            if new_component.component_id in self.components:
+                self.contains_component(new_component)
+                return
+
+            self.components.append(new_component.component_id)
+            # get the index of the last row in the sheet
+            last_row = len(self.components)
+            self.sheet.rows += 1
+    
+# need some error handling done here
+
+            # set the values for the new row
+            ipysheet.cell(last_row,0,new_component.component_id)
+            ipysheet.cell(last_row, 1,new_component.component_name)
+            ipysheet.cell(last_row, 2,new_component.concentration)
+            ipysheet.cell(last_row, 3,new_component.creator.first_name + ' ' + new_component.creator.last_name)
+            ipysheet.cell(last_row, 4,new_component.curr_time)
