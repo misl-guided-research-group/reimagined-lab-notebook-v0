@@ -174,3 +174,16 @@ class Inventory:
         # hwo would we track if they manual entered something in the ipysheet table, i guess when they 
         # type something in and add a row and click something such as "submit" -> we can
         # validate the data in that cell they added,and then save it to a csv data file store
+
+
+    ## Donavan's Temporary Methods 
+
+    # Temporary method to get a components info within the inventory (Talk to Hawa)
+    def get_component(self, component_id):
+        for component in self.components:
+            if component.component_id == component_id:
+                return component
+        return None
+
+    # Need to consider a method that gets just the component_id regardless of concentration
+
