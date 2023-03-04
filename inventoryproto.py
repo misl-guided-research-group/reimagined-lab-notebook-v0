@@ -180,9 +180,8 @@ class Inventory:
 
     # Temporary method to get a components info within the inventory (Talk to Hawa)
     def get_component(self, component_id):
-        for component in self.components:
-            if component.component_id == component_id:
-                return component
+        if component_id in self.components:
+            return component_id
         return None
 
     # Need to consider a method that gets just the component_id regardless of concentration
