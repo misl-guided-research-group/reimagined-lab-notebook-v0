@@ -53,12 +53,12 @@ class Calculator:
         for i in range(0, len(recipes)): 
             
         
-        print(recipes) 
-        recipe_Menu = widgets.Dropdown(
-        options=for c in recipes,
-        value='Search for recipe:',
-        disabled=False,
-        )
+            print(recipes) 
+            recipe_Menu = widgets.Dropdown(
+            options=[recipe for recipe in recipes],
+            value='Search for recipe:',
+            disabled=False,
+            )
 
         return recipe_Menu
 
