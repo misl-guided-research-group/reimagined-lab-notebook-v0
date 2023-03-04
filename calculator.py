@@ -1,5 +1,10 @@
 from alhambra_mixes import *
 import pandas as pd
+from IPython.display import display
+import pandas as pd
+import ipywidgets as widgets
+from ipysheet.easy import cell
+from ipywidgets import Layout
 
 class Calculator:
     # Parses the csv file containing all recipes 
@@ -30,8 +35,8 @@ class Calculator:
             print(component_id)
             # Checks if component is contained in inventory 
             if self.inventory.find_component(component_id): 
-                c = self.inventory.get_component(component_id)
-                mixing_components.append((Component(c.component_name, c.concentration), temp[1]))
+                component = component_id.split("_")
+                mixing_components.append((Component(component[0], component[1]), temp[1]))
 
         # Returns a Mix from alhambra
         return Mix(
@@ -42,6 +47,20 @@ class Calculator:
         buffer_name=row.Buffer,
         fixed_total_volume=volume
         )      
+    
+    def search_for_recipes(self):
+        recipes = self.recipes.iloc[:, 0]
+        for i in range(0, len(recipes)): 
+            
+        
+        print(recipes) 
+        recipe_Menu = widgets.Dropdown(
+        options=for c in recipes,
+        value='Search for recipe:',
+        disabled=False,
+        )
+
+        return recipe_Menu
 
     # Problems: 
     #   1) No way to gain data from the components in the inventory, consider storing Components 
