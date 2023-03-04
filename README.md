@@ -1,6 +1,6 @@
 # reimagined-lab-notebook-prototype-v0
 
-Developers / Researchers : Please create a seperate branch for the individual core features, labelling the branch as follows:
+Developers / Ugrad Researchers : Please create a seperate branch for the individual core features, labelling the branch as follows:
 
 [first initital][full last name]-[feature description] ex hdrammeh-inventory-feature
 
