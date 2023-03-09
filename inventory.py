@@ -91,7 +91,6 @@ class Inventory:
                 # meaning the number corresponding to the position in our components list should be equivalent to row + 1 or row + 2 in the table (accounting for header)
             index = self.components.index(component.component_id)
             #the above is 0th index. so in my table should be +1
-
             pos = index + 1
 
             row = ipysheet.row(pos,[component.component_id, component.component_name, component.concentration, component.creator.first_name, component.curr_time], background_color="green")
