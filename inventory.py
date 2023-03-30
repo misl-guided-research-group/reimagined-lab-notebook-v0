@@ -81,16 +81,16 @@ class Inventory:
 
         return [add_button, remove_button, display_button, search_button]
 
-    # pass in component object as a whole
+    # pass in component object as a whole. this function differse 
+    # to find_component in that it will do the highlighting logic. 
     def contains_component(self, component):
-                # if the unique component already exists, then display table, highlight cell green
+        # if the unique component already exists, then display table, highlight cell green
         # and indicate it is already in there.
         if component.component_id in self.components:
              # can use this mechanism since order of elements is persistent in python
                 # meaning the number corresponding to the position in our components list should be equivalent to row + 1 or row + 2 in the table (accounting for header)
             index = self.components.index(component.component_id)
             #the above is 0th index. so in my table should be +1
-
             pos = index + 1
 
             row = ipysheet.row(pos,[component.component_id, component.component_name, component.concentration, component.creator.first_name, component.curr_time], background_color="green")
@@ -103,7 +103,7 @@ class Inventory:
 
     def add_component(self, component):
 
-        #is it possible for me to grab the data when they enter it in the table in real time
+        # is it possible for me to grab the data when they enter it in the table in real time
         # or maybe i can give them option to add compoennt, dispaly some form, and have the
         # table dynamically update.
 
@@ -116,7 +116,7 @@ class Inventory:
         last_row = len(self.components)
         self.sheet.rows += 1
 
-# need some error handling done here
+        # need some error handling done here
 
         # set the values for the new row
         ipysheet.cell(last_row,0,component.component_id)
@@ -129,29 +129,11 @@ class Inventory:
     def find_component(self, componentId):
         if componentId not in self.components:
             print(f"Component with ID {componentId} is not in the inventory!")
-            self.generate_similar_keys(componentId)
             return False
         
         print(f"Component with ID {componentId} is in the inventory!")
         return True
         
-    # generate similar keys as their failed search utilizing regex, delimitted by _
-    def generate_similar_keys(self, componentId):
-        # delimit the component ID as they are in the for Ab_10, in this case
-        # we dont want the concentration for our regex match, bc we want to implement 
-        # a basic recommendation algorithm 
-
-        # need to transform to lower case in case they want to search!
-        #can specify format of name _ concentration
-        if not componentId:
-            return
-
-        generalId = (componentId.split("_")[0]).lower()
-
-        for id in self.components:
-            if generalId in id.lower():
-                print(f"Consider checking out {id} instead!")
-
 
     def search_for_components(self):
         mixtureMenu = widgets.Dropdown(

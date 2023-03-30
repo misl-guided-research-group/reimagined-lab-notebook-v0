@@ -1,10 +1,10 @@
-# reimagined-lab-notebook-prototype-v0
+# reimagined-lab-notebook-v0
 
-Developers / Researchers : Please create a seperate branch for the individual core features, labelling the branch as follows:
+Developers / Ugrad Researchers : Please create a seperate branch for the individual core features, labelling the branch as follows:
 
 [first initital][full last name]-[feature description] ex hdrammeh-inventory-feature
 
- This repository contains the initial key features that were scoped out utilizing jupyter notebooks + extensions + reactive programming. Version 0 of the reimagined lab notebook ideally should support the following features:
+This repository contains the initial key features that were scoped out utilizing jupyter notebooks + extensions + reactive programming. Version 0 of the reimagined lab notebook ideally should support the following features:
 
 - [ ]  **Calculations: Mixing Calculation Automation (i.e finding concentrations, amounts etc)**
 

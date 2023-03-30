@@ -1,10 +1,9 @@
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryProto{
+public class InventorySystemDesign{
 
     Member member; 
     
