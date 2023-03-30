@@ -7,21 +7,24 @@ from ipysheet.easy import cell
 from ipywidgets import Layout
 
 class Calculator:
-    # Parses the csv file containing all recipes 
-    # Takes in the current inventory 
-        ## Figure out a different way to keep track of inventory, 
-        ## This way is too hard-coded :(
+    # Reads recipe data from a CSV file and initializes an object 
+    # with that data and a given inventory.
     def __init__(self, inventory):
         self.recipes = pd.read_csv("recipes.csv", delimiter="|"); 
         self.inventory = inventory
 
-    # Method to find the index of the row containing the recipe wanted
+    # Searches the 'Name' column of the 'recipes' dataframe for a 
+    # given recipe name and returns the index of the first matching row.
     def find_recipe_index(self, name: str) -> int:
         for i in range(0, len(self.recipes)):
             if (self.recipes.loc[i].Name == name):
                 return i
                 
-    # Method to create mixes using the Inventory and Component classes (Hawa created)
+    # Method to create mixes using the Inventory and Component classes
+    # Creates a mix using a recipe specified by 'name' and a given 'volume'. The 
+    # recipe's components are checked against the Inventory class, and if they are 
+    # contained, they are added to a list of 'mixing_components' as Component 
+    # objects with corresponding volumes.
     def create_mix(self, name: str, volume: str): 
         # Parses the row into name, buffer, and components  
         index = self.find_recipe_index(name)   
