@@ -7,6 +7,15 @@ from IPython.display import display
 class TaskList:
     def __init__(self):
         self.tasks = {}
+
+         # Create the initial display of buttons
+        add_button = widgets.Button(description="Add Task")
+        remove_button = widgets.Button(description="Remove Task")
+        
+        add_button.on_click(self.add_task)
+        remove_button.on_click(self.remove_task)
+        
+        display(add_button, remove_button)
     
     # Adds a task 
     def add_task(self, _):
