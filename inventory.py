@@ -38,8 +38,7 @@ class Inventory:
         search_button.on_click(self.contains_component)
         display_button.on_click(self.display_inventory)
 
-        button_layout = widgets.HBox([add_button, remove_button, display_button, search_button])
-        display(button_layout)
+        display(add_button, remove_button, display_button, search_button)
 
     # Updates all the displays 
     def display_inventory(self, _): 
@@ -55,14 +54,13 @@ class Inventory:
         concentration_text = widgets.Text(description="Concentration:")
         is_buffer_text = widgets.Text(description="Is Buffer:")
 
-        # Display the input widgets
-        display(creator_text)
-        display(component_name_text)
-        display(concentration_text)
-        display(is_buffer_text)
+        # Create a submit button
+        submit_button = widgets.Button(description="Submit")
 
-        # Define a function to handle input submission
-        def handle_submit(sender):
+        # Display the input widgets and submit button
+        display(creator_text, component_name_text, concentration_text, is_buffer_text, submit_button)
+
+        def handle_submit(button):
             # Retrieve the input values
             creator = creator_text.value
             component_name = component_name_text.value
@@ -82,25 +80,26 @@ class Inventory:
             # Display a message to indicate the component was added
             print(f"Component with ID {new_component.component_id} was successfully added to the inventory.")
 
-            # Close the input widgets
+            # Close the input widgets and submit button
             creator_text.close()
             component_name_text.close()
             concentration_text.close()
             is_buffer_text.close()
+            submit_button.close()
 
         # Register the submit handler
-        creator_text.on_submit(handle_submit)
-        component_name_text.on_submit(handle_submit)
-        concentration_text.on_submit(handle_submit)
-        is_buffer_text.on_submit(handle_submit)
+        submit_button.on_click(handle_submit)
 
     # Removes an existing component in the inventory 
     def remove_component(self, _):
         # Widget to get Component ID
         component_id_text = widgets.Text(description="Component ID:")
 
+        # Create a submit button
+        submit_button = widgets.Button(description="Submit")
+
         # Display the input widgets
-        display(component_id_text)
+        display(component_id_text, submit_button)
 
         # Define a function to handle input submission
         def handle_submit(sender):
@@ -126,9 +125,9 @@ class Inventory:
 
             # Close the input widgets
             component_id_text.close()
-        
+
         # Register the submit handler
-        component_id_text.on_submit(handle_submit)
+        submit_button.on_submit(handle_submit)
 
     # pass in component object as a whole. this function differse 
     # to find_component in that it will do the highlighting logic. 
