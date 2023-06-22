@@ -1,5 +1,5 @@
 from datetime import datetime
-from IPython.display import display
+from IPython.display import display, clear_output
 import ipywidgets as widgets
 import pandas as pd
 
@@ -32,13 +32,14 @@ class Inventory:
         remove_button = widgets.Button(description="Remove Component")
         display_button = widgets.Button(description="Display All Components")
         search_button = widgets.Button(description="Search for Component")
+        self.buttons_layout = widgets.HBox([add_button, remove_button, display_button, search_button])
 
         add_button.on_click(self.add_component)
         remove_button.on_click(self.remove_component)
         search_button.on_click(self.contains_component)
         display_button.on_click(self.display_inventory)
 
-        display(add_button, remove_button, display_button, search_button)
+        display(self.buttons_layout)
 
     # Updates all the displays 
     def display_inventory(self, _): 
@@ -46,7 +47,6 @@ class Inventory:
         print(self.df)
         
     # Adds a new component to the inventory.
-    #   - Note: use of enter inputs all values 
     def add_component(self, _):
         # Create text input widgets
         creator_text = widgets.Text(description="Creator:")
@@ -80,12 +80,11 @@ class Inventory:
             # Display a message to indicate the component was added
             print(f"Component with ID {new_component.component_id} was successfully added to the inventory.")
 
-            # Close the input widgets and submit button
-            creator_text.close()
-            component_name_text.close()
-            concentration_text.close()
-            is_buffer_text.close()
-            submit_button.close()
+            # Clear the output to remove the input widgets and submit button
+            clear_output()
+
+            # Redisplay the necessary elements
+            display(self.buttons_layout)
 
         # Register the submit handler
         submit_button.on_click(handle_submit)
@@ -123,11 +122,14 @@ class Inventory:
             # Display a message to indicate the component was not found
             print(f"Component with ID {component_id} is not within the inventory.")
 
-            # Close the input widgets
-            component_id_text.close()
+            # Clear the output to remove the input widgets and submit button
+            clear_output()
+
+            # Redisplay the necessary elements
+            display(self.buttons_layout)
 
         # Register the submit handler
-        submit_button.on_submit(handle_submit)
+        submit_button.on_click(handle_submit)
 
     # pass in component object as a whole. this function differse 
     # to find_component in that it will do the highlighting logic. 
@@ -156,12 +158,3 @@ class Inventory:
         
         # Register the submit handler
         component_id_text.on_submit(handle_submit)
-
-# inventory shouldnt be able to add things within the actual jupyter notebook.
-# not even sure if we should be able to remove things from the inventory because it seems
-# to somewhat ruin the purpose. I am not sure if we should just keep some external csv file to populate and remobve
-# or when they add something, I would need to figure out a way to write that to a csv file. 
-# hwo would we track if they manual entered something in the ipysheet table, i guess when they 
-# type something in and add a row and click something such as "submit" -> we can
-# validate the data in that cell they added,and then save it to a csv data file store
-
